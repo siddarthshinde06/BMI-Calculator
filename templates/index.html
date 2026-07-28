@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Smart BMI Calculator</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="topbar">
+  <h1>🧮 AI Smart BMI Calculator</h1>
+  <button id="themeToggle" class="theme-toggle">🌙 Dark Mode</button>
+</header>
+
+<main class="container">
+
+  <!-- ===== INPUT CARD ===== -->
+  <section class="card">
+    <div class="unit-switch">
+      <button class="unit-btn active" data-system="metric">Metric</button>
+      <button class="unit-btn" data-system="imperial">Imperial</button>
+    </div>
+
+    <form id="bmiForm">
+      <!-- Height -->
+      <div class="field-group">
+        <label>Height</label>
+        <div class="input-row" id="heightMetricRow">
+          <input type="number" id="heightCm" placeholder="e.g. 170" step="0.1">
+          <select id="heightUnitMetric">
+            <option value="cm">cm</option>
+            <option value="m">m</option>
+            <option value="mm">mm</option>
+          </select>
+        </div>
+        <div class="input-row hidden" id="heightImperialRow">
+          <input type="number" id="heightFt" placeholder="ft" min="0">
+          <input type="number" id="heightIn" placeholder="in" min="0" step="0.1">
+        </div>
+      </div>
+
+      <!-- Weight -->
+      <div class="field-group">
+        <label>Weight</label>
+        <div class="input-row" id="weightMetricRow">
+          <input type="number" id="weightKg" placeholder="e.g. 65" step="0.1">
+          <select id="weightUnitMetric">
+            <option value="kg">kg</option>
+            <option value="g">g</option>
+          </select>
+        </div>
+        <div class="input-row hidden" id="weightImperialRow">
+          <input type="number" id="weightLb" placeholder="e.g. 150" step="0.1">
+          <select id="weightUnitImperial">
+            <option value="lb">lb</option>
+            <option value="stone">stone (+lb below)</option>
+          </select>
+        </div>
+        <div class="input-row hidden" id="stonePoundsRow">
+          <input type="number" id="weightStone" placeholder="stone" min="0">
+          <input type="number" id="weightStoneLb" placeholder="lb" min="0" step="0.1">
+        </div>
+      </div>
+
+      <!-- Optional fields -->
+      <div class="field-group two-col">
+        <div>
+          <label>Age <span class="optional">(optional)</span></label>
+          <input type="number" id="age" placeholder="e.g. 28" min="1" max="120">
+        </div>
+        <div>
+          <label>Gender <span class="optional">(optional)</span></label>
+          <select id="gender">
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label>Goal <span class="optional">(optional)</span></label>
+        <select id="goal">
+          <option value="">Select</option>
+          <option value="lose">Lose Weight</option>
+          <option value="maintain">Maintain Weight</option>
+          <option value="gain">Gain Weight</option>
+        </select>
+      </div>
+
+      <div id="errorBox" class="error-box hidden"></div>
+
+      <div class="button-row">
+        <button type="submit" class="primary-btn">Calculate BMI</button>
+        <button type="button" id="resetBtn" class="secondary-btn">Reset</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ===== RESULTS CARD ===== -->
+  <section class="card result-card hidden" id="resultCard">
+    <div class="bmi-headline">
+      <div class="bmi-score" id="bmiScore">--</div>
+      <div class="bmi-category" id="bmiCategory">--</div>
+    </div>
+
+    <!-- BMI Meter -->
+    <div class="bmi-meter">
+      <div class="meter-bar">
+        <span class="seg underweight">Underweight</span>
+        <span class="seg normal">Normal</span>
+        <span class="seg overweight">Overweight</span>
+        <span class="seg obese">Obese</span>
+      </div>
+      <div class="meter-indicator" id="meterIndicator"></div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat"><span class="stat-label">Health Risk</span><span class="stat-value" id="riskLevel">--</span></div>
+      <div class="stat"><span class="stat-label">Healthy Weight Range</span><span class="stat-value" id="healthyRange">--</span></div>
+      <div class="stat"><span class="stat-label">To Reach Goal</span><span class="stat-value" id="weightGoal">--</span></div>
+      <div class="stat"><span class="stat-label">BMI Prime</span><span class="stat-value" id="bmiPrime">--</span></div>
+      <div class="stat"><span class="stat-label">Ponderal Index</span><span class="stat-value" id="ponderalIndex">--</span></div>
+      <div class="stat"><span class="stat-label">Daily Calories (est.)</span><span class="stat-value" id="calories">--</span></div>
+      <div class="stat"><span class="stat-label">Daily Protein (est.)</span><span class="stat-value" id="protein">--</span></div>
+      <div class="stat"><span class="stat-label">Daily Water (est.)</span><span class="stat-value" id="water">--</span></div>
+    </div>
+
+    <!-- AI Recommendation -->
+    <div class="recommendation">
+      <h2>🩺 Health Recommendation</h2>
+      <p id="recAnalysis"></p>
+
+      <div class="rec-grid">
+        <div>
+          <h3>Foods to Eat</h3>
+          <ul id="recEat"></ul>
+        </div>
+        <div>
+          <h3>Foods to Limit</h3>
+          <ul id="recLimit"></ul>
+        </div>
+        <div>
+          <h3>Key Nutrients</h3>
+          <ul id="recNutrients"></ul>
+        </div>
+        <div>
+          <h3>Exercise Suggestions</h3>
+          <ul id="recExercise"></ul>
+        </div>
+      </div>
+
+      <h3>Tips</h3>
+      <ul id="recTips"></ul>
+
+      <p class="disclaimer">⚠️ This tool provides general estimates only and is not a substitute for professional medical advice. Please consult a healthcare provider for personalized guidance.</p>
+    </div>
+
+    <div class="button-row">
+      <button id="printBtn" class="secondary-btn">🖨️ Print Results</button>
+    </div>
+  </section>
+
+  <!-- ===== RECENT CALCULATIONS ===== -->
+  <section class="card hidden" id="recentCard">
+    <h2>Recent Calculations</h2>
+    <ul id="recentList" class="recent-list"></ul>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>AI Smart BMI Calculator &mdash; rule-based recommendations, runs 100% locally.</p>
+</footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

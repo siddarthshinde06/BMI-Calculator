@@ -1,0 +1,441 @@
+
+/* ============ Modern + Classic Windows Mix ============ */
+:root {
+  --bg: #f3f3f3;
+  --surface: #ffffff;
+  --surface-elevated: #ffffff;
+  --text: #1a1a1a;
+  --text-secondary: #5c5c5c;
+  --accent: #0078d4;
+  --accent-hover: #106ebe;
+  --accent-pressed: #005a9e;
+  --border: #e0e0e0;
+  --border-strong: #c8c8c8;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --radius: 8px;
+  --radius-sm: 6px;
+  --titlebar-start: #0078d4;
+  --titlebar-end: #005a9e;
+  --success: #107c10;
+  --warning: #ff8c00;
+  --danger: #d13438;
+  --info: #0078d4;
+  --meter-under: #00bcf2;
+  --meter-normal: #107c10;
+  --meter-over: #ff8c00;
+  --meter-obese: #d13438;
+  --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font);
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ============ Top bar – modern Windows title bar feel ============ */
+.topbar {
+  background: linear-gradient(90deg, var(--titlebar-start), var(--titlebar-end));
+  color: white;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: var(--font);
+  transition: background 0.15s ease;
+}
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ============ Layout ============ */
+.container {
+  width: 92%;
+  max-width: 720px;
+  margin: 24px auto;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ============ Unit switch – modern pill ============ */
+.unit-switch {
+  display: inline-flex;
+  background: #f0f0f0;
+  border-radius: 999px;
+  padding: 3px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+}
+
+.unit-btn {
+  border: none;
+  background: transparent;
+  padding: 7px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-family: var(--font);
+  transition: all 0.15s ease;
+}
+
+.unit-btn.active {
+  background: var(--accent);
+  color: white;
+  box-shadow: 0 1px 3px rgba(0, 120, 212, 0.3);
+}
+
+/* ============ Form ============ */
+.field-group {
+  margin-bottom: 16px;
+}
+
+.field-group label {
+  display: block;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.optional {
+  font-weight: 400;
+  color: #8a8a8a;
+}
+
+.input-row {
+  display: flex;
+  gap: 10px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 0;
+  margin-bottom: 4px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: var(--font);
+  background: white;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.2);
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.error-box {
+  background: #fde7e9;
+  color: #a80000;
+  border: 1px solid #f1aeb5;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+/* Buttons – modern Windows style */
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font);
+  transition: background 0.15s ease;
+}
+
+button:hover {
+  background: var(--accent-hover);
+}
+
+button:active {
+  background: var(--accent-pressed);
+}
+
+.button-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.primary-btn,
+.secondary-btn {
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  flex: 1;
+  font-family: var(--font);
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.primary-btn {
+  background: var(--accent);
+  color: white;
+}
+.primary-btn:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 2px 6px rgba(0, 120, 212, 0.3);
+}
+
+.secondary-btn {
+  background: #f3f3f3;
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+}
+.secondary-btn:hover {
+  background: #e8e8e8;
+}
+
+/* ============ Results ============ */
+.bmi-headline {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.bmi-score {
+  font-family: var(--font);
+  font-size: 48px;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.bmi-category {
+  margin-top: 6px;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+/* BMI meter – clean modern bar with classic color meaning */
+.meter-bar {
+  display: flex;
+  height: 28px;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.seg {
+  flex: 1;
+  text-align: center;
+  line-height: 28px;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.underweight { background: var(--meter-under); }
+.normal      { background: var(--meter-normal); }
+.overweight  { background: var(--meter-over); }
+.obese       { background: var(--meter-obese); }
+
+.meter-indicator {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  margin-top: -24px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transition: left 0.5s ease;
+  left: 0%;
+}
+
+/* Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.stat {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  background: #fafafa;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 2px;
+}
+
+/* Recommendation */
+.recommendation {
+  margin-top: 22px;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
+.recommendation h2 {
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.recommendation h3 {
+  font-size: 14px;
+  margin: 14px 0 6px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.recommendation ul {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
+
+.rec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.disclaimer {
+  margin-top: 18px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  background: #fff8e8;
+  border-left: 4px solid var(--warning);
+  padding: 10px 14px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+/* Recent list */
+.recent-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recent-list li {
+  display: flex;
+  justify-content: space-between;
+  background: #f7f7f7;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  border: 1px solid var(--border);
+}
+
+.footer {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 12.5px;
+  padding: 20px;
+}
+
+/* Responsive */
+@media (max-width: 560px) {
+  .two-col,
+  .rec-grid,
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .topbar {
+    padding: 10px 16px;
+  }
+  .card {
+    padding: 18px;
+  }
+  .bmi-score {
+    font-size: 38px;
+  }
+  .container {
+    width: 94%;
+    margin: 16px auto;
+  }
+}
+
+/* Print */
+@media print {
+  .topbar,
+  .card:not(.result-card),
+  .button-row,
+  .theme-toggle {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+}

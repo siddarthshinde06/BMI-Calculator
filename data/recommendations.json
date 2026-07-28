@@ -1,0 +1,34 @@
+{
+  "Underweight": {
+    "analysis": "Your weight is below the healthy range for your height. Focus on nutrient-dense foods to gain weight steadily and healthily.",
+    "eat": ["Eggs", "Milk", "Paneer", "Chicken", "Fish", "Rice", "Oats", "Bananas", "Nuts", "Peanut Butter"],
+    "limit": ["Empty-calorie junk food", "Excess caffeine"],
+    "nutrients": ["Protein", "Healthy Fats", "Calcium", "Iron", "Vitamin D", "Vitamin B12"],
+    "exercise": ["Strength Training", "Light Cardio"],
+    "tips": ["Eat frequent, smaller meals", "Add healthy snacks between meals", "Prioritize protein at every meal"]
+  },
+  "Normal weight": {
+    "analysis": "You're in a healthy weight range. Keep up balanced eating and regular activity to maintain it.",
+    "eat": ["Fruits", "Vegetables", "Whole Grains", "Lean Protein", "Dairy"],
+    "limit": ["Excess sugar", "Highly processed foods"],
+    "nutrients": ["Balanced Protein", "Fibre", "Healthy Fats"],
+    "exercise": ["Walking", "Cycling", "Strength Training"],
+    "tips": ["Stay consistent with a balanced diet", "Get regular exercise", "Prioritize good sleep"]
+  },
+  "Overweight": {
+    "analysis": "Your weight is above the healthy range. Small, sustainable changes to diet and activity can help you move toward a healthier BMI.",
+    "eat": ["Chicken Breast", "Fish", "Lentils", "Tofu", "Brown Rice", "Oats", "Vegetables", "Fruits"],
+    "limit": ["Fried Foods", "Sugary Drinks", "Fast Food", "Processed Snacks"],
+    "nutrients": ["Protein", "Fibre", "Potassium", "Vitamin C"],
+    "exercise": ["Walking", "Swimming", "Cycling"],
+    "tips": ["Aim for a moderate calorie deficit", "Increase daily activity", "Drink water before meals"]
+  },
+  "Obese": {
+    "analysis": "Your BMI falls in the obesity range, which carries higher health risks. A gradual, sustainable plan works best, ideally with guidance from a healthcare professional.",
+    "eat": ["Leafy Greens", "Lean Protein", "Whole Grains", "Legumes"],
+    "limit": ["Soft Drinks", "Junk Food", "Refined Sugar", "High-fat Processed Foods"],
+    "nutrients": ["Protein", "Fibre", "Water"],
+    "exercise": ["Walking", "Water Exercises", "Low-impact Cardio"],
+    "tips": ["Start with low-impact activity", "Focus on whole, unprocessed foods", "Consult a doctor before starting a new routine"]
+  }
+}
